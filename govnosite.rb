@@ -4,7 +4,7 @@
 ###
 
 def commit_all_with_message(message)
-  git :add => ".", :commit => "-a -m #{message}"
+  git :add => ".", :commit => "-a -m \"#{message}\""
 end
 
 puts 'Some questions about ongoing project:'
@@ -54,7 +54,8 @@ EOF
 
 commit_all_with_message('Basic setup of rails app. .gitignore, robots.txt and other stuff.')
 
-# Plugins and gems               
+# Plugins and gems  
+plugin('uni-form', :git => 'git://github.com/cthiel/uni-form.git', :submodule => true)
 plugin('will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true)
 plugin('asset_packager', :git => 'git://github.com/sbecker/asset_packager.git', :submodule => true) if need_asset_packager
 plugin('jrails', :git => 'git://github.com/aaronchi/jrails.git', :submodule => true) if need_jquery
