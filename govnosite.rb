@@ -4,7 +4,8 @@
 ###
 
 def commit_all_with_message(message)
-  git :add => ".", :commit => "-a -m \"#{message}\""
+  git :add => "."
+  git :commit => "-a -m \"#{message}\""
 end
 
 puts 'Some questions about ongoing project:'
@@ -37,12 +38,12 @@ git :init
 run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")
 
 file '.gitignore', <<-EOF
-log/\\*.log
-log/\\*.pid
-db/\\*.db
-db/\\*.sqlite3
+log/*.log
+log/*.pid
+db/*.db
+db/*.sqlite3
 db/schema.rb
-tmp/\\*\\*/\\*
+tmp/**/*
 doc/api
 doc/app
 config/database.yml
@@ -52,9 +53,9 @@ config/database.yml
 .DS_Store
 EOF
 
-commit_all_with_message('Basic setup of rails app. .gitignore, robots.txt and other stuff.')
+commit_all_with_message 'Basic setup of rails app. .gitignore, robots.txt and other stuff.'
 
-# Plugins and gems  
+# Plugins and gems
 plugin('uni-form', :git => 'git://github.com/cthiel/uni-form.git', :submodule => true)
 plugin('will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true)
 plugin('asset_packager', :git => 'git://github.com/sbecker/asset_packager.git', :submodule => true) if need_asset_packager
@@ -70,16 +71,16 @@ if need_authorisation
 end
 
 if need_aasm
-  gem 'rubyist-aasm', :source => 'http://gems.github.com'
+  gem 'rubyist-aasm', :source => 'http://gems.github.com', :lib => 'aasm'
 end
 
-gem 'ryanb-nifty-generators', :source => 'http://gems.github.com'
+gem 'nifty-generators', :lib => 'nifty_generators'
 gem 'cucumber'
 
 rake("gems:install", :sudo => true)
 rake("gems:unpack")
 
-git :submodule => "init" 
+git :submodule => "init"
 
 commit_all_with_message 'Useful plugins as submodules and unpacked gems'
 
@@ -98,8 +99,8 @@ generate :cucumber
 commit_all_with_message 'Cucumbered'
 
 if need_authorisation
-  generate("authlogic", "user session")
-  commit_all_with_message 'Authlogic base models'
+  generate("nifty_authentication", "--authlogic")
+  commit_all_with_message 'Nifty_authentication with authlogic'
 end
 
 rake("db:migrate")
