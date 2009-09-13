@@ -17,6 +17,7 @@ need_exception_notification = yes?('Need exception_notifier?')
 need_attachements = yes?('Need file or image uploads?')
 need_wysiwyg = yes?('Need WYSIWYG editor?')
 need_russian = yes?('Need russian gem?')
+need_tags = yes?('Need tagging?')
 
 need_authorisation = yes?('Need authorisation support?')
 if need_authorisation
@@ -64,6 +65,7 @@ plugin('exception_notifier', :git => 'git://github.com/rails/exception_notificat
 plugin('paperclip', :git => 'git://github.com/thoughtbot/paperclip.git', :submodule => true) if need_attachements
 plugin('tiny_mce', :git => 'git://github.com/kete/tiny_mce.git', :submodule => true) if need_wysiwyg
 plugin('russian', :git => 'git://github.com/yaroslav/russian.git', :submodule => true) if need_russian
+plugin('acts-as-taggable-on', :git => 'git://github.com/mbleigh/acts-as-taggable-on.git', :submodule => true) if need_tags
 
 if need_authorisation
   plugin('authlogic', :git => 'git://github.com/binarylogic/authlogic.git', :submodule => true)
