@@ -100,6 +100,27 @@ commit_all_with_message 'Nifty config'
 generate :cucumber
 commit_all_with_message 'Cucumbered'
 
+if need_tags
+  generate :acts_as_taggable_on_migration
+  commit_all_with_message 'Taged'
+end
+
+run 'cp vendor/plugins/uni-form/resources/public/javascripts/uni-form.prototype.js public/javascripts'
+run 'cp vendor/plugins/uni-form/resources/public/stylesheets/uni-form-generic.css public/stylesheets'
+run 'cp vendor/plugins/uni-form/resources/public/stylesheets/uni-form.css public/stylesheets'
+commit_all_with_message 'Uni-form script and css copied to public'
+
+if need_jquery
+  rake("jrails:js:scrub")
+  rake("jrails:js:install")
+  commit_all_with_message 'Jquery scripts copied to public'
+end
+
+if need_wysiwyg
+  rake("tiny_mce:install")
+  commit_all_with_message 'Tiny_mce installed'
+end
+
 if need_authorisation
   generate("nifty_authentication", "--authlogic")
   commit_all_with_message 'Nifty_authentication with authlogic'
