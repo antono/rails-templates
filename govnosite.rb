@@ -2,7 +2,6 @@
 ###
 ### Govnosite Rails Template
 ###
-
 def commit_all_with_message(message)
   git :add => ".", :commit => "-a -m \"#{message}\""
 end
@@ -25,12 +24,23 @@ end
 ##
 ## Initial git setup
 ##
-run "echo TODO > README"
 run "rm doc/README_FOR_APP"
 run "rm public/index.html"
 run "rm public/favicon.ico"
 run "rm public/images/rails.png"
+run "cp config/database.yml config/database.yml.example"
 file 'public/robots.txt', "User-Agent: *\nAllow: /"
+file "README", <<-EOF
+Git modules!
+============
+
+To start using this app you should first init and update git modules:
+
+    $ git submodule init && git submodule upate
+
+TODO
+====
+EOF
 
 git :init
 
@@ -54,7 +64,7 @@ EOF
 
 commit_all_with_message('Basic setup of rails app. .gitignore, robots.txt and other stuff.')
 
-# Plugins and gems  
+# Plugins and gems
 plugin('uni-form', :git => 'git://github.com/cthiel/uni-form.git', :submodule => true)
 plugin('will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true)
 plugin('asset_packager', :git => 'git://github.com/sbecker/asset_packager.git', :submodule => true) if need_asset_packager
@@ -73,13 +83,13 @@ if need_aasm
   gem 'rubyist-aasm', :source => 'http://gems.github.com'
 end
 
-gem 'ryanb-nifty-generators', :source => 'http://gems.github.com'
+gem 'nifty-generators'
 gem 'cucumber'
 
 rake("gems:install", :sudo => true)
 rake("gems:unpack")
 
-git :submodule => "init" 
+git :submodule => "init"
 
 commit_all_with_message 'Useful plugins as submodules and unpacked gems'
 
