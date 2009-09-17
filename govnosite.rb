@@ -126,11 +126,6 @@ if need_jquery
   commit_all_with_message 'Jquery scripts copied to public'
 end
 
-if need_wysiwyg
-  rake("tiny_mce:install")
-  commit_all_with_message 'Tiny_mce installed'
-end
-
 if need_authorisation
   generate("nifty_authentication", "--authlogic")
   commit_all_with_message 'Nifty_authentication with authlogic'
