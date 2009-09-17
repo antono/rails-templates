@@ -115,6 +115,11 @@ if need_tags
   commit_all_with_message 'Taged'
 end
 
+if need_jquery
+  run 'cp vendor/plugins/uni-form/resources/public/javascripts/jquery.uni-form.js public/javascripts'
+else
+  run 'cp vendor/plugins/uni-form/resources/public/javascripts/uni-form.prototype.js public/javascripts'
+end
 run 'cp vendor/plugins/uni-form/resources/public/javascripts/uni-form.prototype.js public/javascripts'
 run 'cp vendor/plugins/uni-form/resources/public/stylesheets/uni-form-generic.css public/stylesheets'
 run 'cp vendor/plugins/uni-form/resources/public/stylesheets/uni-form.css public/stylesheets'
