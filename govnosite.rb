@@ -67,7 +67,7 @@ EOF
 commit_all_with_message 'Basic setup of rails app. .gitignore, robots.txt and other stuff.'
 
 # Plugins and gems
-plugin('uni-form', :git => 'git://github.com/cthiel/uni-form.git', :submodule => true)
+plugin('uni-form', :git => 'git://github.com/antono/uni-form.git', :submodule => true)
 plugin('will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true)
 plugin('asset_packager', :git => 'git://github.com/sbecker/asset_packager.git', :submodule => true) if need_asset_packager
 plugin('jrails', :git => 'git://github.com/aaronchi/jrails.git', :submodule => true) if need_jquery
@@ -86,7 +86,7 @@ if need_aasm
   gem 'rubyist-aasm', :source => 'http://gems.github.com', :lib => 'aasm'
 end
 
-gem 'nifty-generators'
+gem 'nifty-generators', :lib => 'nifty_generators'
 gem 'cucumber'
 
 rake("gems:install", :sudo => true)
