@@ -138,7 +138,6 @@ if need_jquery
 else
   run 'cp vendor/plugins/uni-form/resources/public/javascripts/uni-form.prototype.js public/javascripts'
 end
-run 'cp vendor/plugins/uni-form/resources/public/javascripts/uni-form.prototype.js public/javascripts'
 run 'cp vendor/plugins/uni-form/resources/public/stylesheets/uni-form-generic.css public/stylesheets'
 run 'cp vendor/plugins/uni-form/resources/public/stylesheets/uni-form.css public/stylesheets'
 commit_all_with_message 'Uni-form script and css copied to public'
