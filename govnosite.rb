@@ -17,6 +17,7 @@ need_attachements = yes?('Need file or image uploads?')
 need_wysiwyg = yes?('Need WYSIWYG editor?')
 need_russian = yes?('Need russian gem?')
 need_tags = yes?('Need tagging?')
+need_all_deveopment_helpers = true
 
 need_authorisation = yes?('Need authorisation support?')
 if need_authorisation
@@ -67,9 +68,24 @@ EOF
 commit_all_with_message 'Basic setup of rails app. .gitignore, robots.txt and other stuff.'
 
 # Plugins and gems
+
+if need_all_deveopment_helpers
+  # Xilence removes all that annoying HTML and CSS code from your rails
+  # backtrace for ajax requests
+  plugin('xilence', :git => 'git://github.com/inem/xilence.git', :submodule => true)
+
+  # Output honc(expression) to FireBug console.
+  # http://rozenbom.r09.railsrumble.com/handcar
+  # http://rozenbom.r09.railsrumble.com/plugins/handcar.xpi
+  plugin('handcar', :git => 'git://github.com/inem/handcar.git', :submodule => true)
+end
+
+# uni-form helper for rails
 plugin('uni-form', :git => 'git://github.com/antono/uni-form.git', :submodule => true)
+# favorite paginator
 plugin('will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true)
 plugin('asset_packager', :git => 'git://github.com/sbecker/asset_packager.git', :submodule => true) if need_asset_packager
+# jQuery for rails
 plugin('jrails', :git => 'git://github.com/aaronchi/jrails.git', :submodule => true) if need_jquery
 plugin('exception_notifier', :git => 'git://github.com/rails/exception_notification.git', :submodule => true) if need_exception_notification
 plugin('paperclip', :git => 'git://github.com/thoughtbot/paperclip.git', :submodule => true) if need_attachements
