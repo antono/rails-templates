@@ -18,6 +18,7 @@ need_wysiwyg = yes?('Need WYSIWYG editor?')
 need_russian = yes?('Need russian gem?')
 need_tags = yes?('Need tagging?')
 need_all_deveopment_helpers = true
+need_menu = yes?('Need semantic menu')
 
 need_authorisation = yes?('Need authorisation support?')
 if need_authorisation
@@ -92,6 +93,7 @@ plugin('paperclip', :git => 'git://github.com/thoughtbot/paperclip.git', :submod
 plugin('tiny_mce', :git => 'git://github.com/kete/tiny_mce.git', :submodule => true) if need_wysiwyg
 plugin('russian', :git => 'git://github.com/yaroslav/russian.git', :submodule => true) if need_russian
 plugin('acts-as-taggable-on', :git => 'git://github.com/mbleigh/acts-as-taggable-on.git', :submodule => true) if need_tags
+plugin('semantic-menu', :git => 'git://github.com/danielharan/semantic-menu.git', :submodule => true) if need_menu
 
 if need_authorisation
   plugin('authlogic', :git => 'git://github.com/binarylogic/authlogic.git', :submodule => true)
