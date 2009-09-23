@@ -57,6 +57,9 @@ db/*.db
 db/*.sqlite3
 db/schema.rb
 tmp/**/*
+# we use lesscss
+public/stylesheets/*.css
+public/stylesheets/**/*.css
 doc/api
 doc/app
 config/database.yml
@@ -83,6 +86,9 @@ end
 
 # uni-form helper for rails
 plugin('uni-form', :git => 'git://github.com/antono/uni-form.git', :submodule => true)
+# We always need a model without table...
+plugin('tableless', :git => 'git://github.com/robinsp/active_record_tableless.git', :submodule => true)
+plugin('less-for-rails', :git => 'git://github.com/augustl/less-for-rails.git', :submodule => true)
 # favorite paginator
 plugin('will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true)
 plugin('asset_packager', :git => 'git://github.com/sbecker/asset_packager.git', :submodule => true) if need_asset_packager
@@ -106,6 +112,7 @@ end
 
 gem 'nifty-generators', :lib => 'nifty_generators'
 gem 'cucumber'
+gem 'lesscss'
 
 rake("gems:install", :sudo => true)
 rake("gems:unpack")
@@ -141,6 +148,10 @@ end
 run 'cp vendor/plugins/uni-form/resources/public/stylesheets/uni-form-generic.css public/stylesheets'
 run 'cp vendor/plugins/uni-form/resources/public/stylesheets/uni-form.css public/stylesheets'
 commit_all_with_message 'Uni-form script and css copied to public'
+
+# sudo apt-get install linux-util
+run %w{find ./public/stylesheets/ -name "*.css" -print | xargs rename "/\.css$/\.less$" }
+commit_all_with_message 'Less css files'
 
 if need_jquery
   rake("jrails:js:scrub")
