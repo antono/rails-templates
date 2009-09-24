@@ -17,8 +17,8 @@ need_attachements = yes?('Need file or image uploads?')
 need_wysiwyg = yes?('Need WYSIWYG editor?')
 need_russian = yes?('Need russian gem?')
 need_tags = yes?('Need tagging?')
-need_all_deveopment_helpers = true
 need_menu = yes?('Need semantic menu')
+need_all_deveopment_helpers = true
 
 need_authorisation = yes?('Need authorisation support?')
 if need_authorisation
@@ -74,6 +74,9 @@ commit_all_with_message 'Basic setup of rails app. .gitignore, robots.txt and ot
 # Plugins and gems
 
 if need_all_deveopment_helpers
+  # Notify about exceptions
+  plugin('exception_notifier', :git => 'git://github.com/rails/exception_notification.git', :submodule => true) if need_exception_notification
+
   # Xilence removes all that annoying HTML and CSS code from your rails
   # backtrace for ajax requests
   plugin('xilence', :git => 'git://github.com/inem/xilence.git', :submodule => true)
@@ -82,6 +85,29 @@ if need_all_deveopment_helpers
   # http://rozenbom.r09.railsrumble.com/handcar
   # http://rozenbom.r09.railsrumble.com/plugins/handcar.xpi
   plugin('handcar', :git => 'git://github.com/inem/handcar.git', :submodule => true)
+
+  # Find unused css selectors with rake deadweight
+  gem 'aanand-deadweight', :source => 'http://gems.github.com', :lib => 'deadweight'
+  rakefile 'deadweight.rake' do
+    <<-TASK
+    # lib/tasks/deadweight.rake
+    begin
+      require 'deadweight'
+    rescue LoadError
+    ensure
+      puts 'sudo gem install aanand-deadweight'
+    end
+
+    desc "run Deadweight CSS check (requires script/server)"
+    task :deadweight do
+      dw = Deadweight.new
+      dw.stylesheets = ["/stylesheets/application.css"]
+      dw.pages = ["/", "/feeds", "/about", "/episodes/archive", "/comments", "/episodes/1-caching-with-instance-variables"]
+      dw.ignore_selectors = /flash_notice|flash_error|errorExplanation|fieldWithErrors/
+      puts dw.run
+    end
+    TASK
+  end
 end
 
 # uni-form helper for rails
@@ -94,7 +120,6 @@ plugin('will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :su
 plugin('asset_packager', :git => 'git://github.com/sbecker/asset_packager.git', :submodule => true) if need_asset_packager
 # jQuery for rails
 plugin('jrails', :git => 'git://github.com/aaronchi/jrails.git', :submodule => true) if need_jquery
-plugin('exception_notifier', :git => 'git://github.com/rails/exception_notification.git', :submodule => true) if need_exception_notification
 plugin('paperclip', :git => 'git://github.com/thoughtbot/paperclip.git', :submodule => true) if need_attachements
 plugin('tiny_mce', :git => 'git://github.com/kete/tiny_mce.git', :submodule => true) if need_wysiwyg
 plugin('russian', :git => 'git://github.com/yaroslav/russian.git', :submodule => true) if need_russian
