@@ -91,6 +91,9 @@ if need_all_deveopment_helpers
   # http://rozenbom.r09.railsrumble.com/plugins/handcar.xpi
   plugin('handcar', :git => 'git://github.com/inem/handcar.git', :submodule => true)
 
+  # rake db:annotate
+  plugin('annotate_models', :git => 'git://github.com/rotuka/annotate_models.git', :submodule => true)
+
   # Find unused css selectors with rake deadweight
   gem 'aanand-deadweight', :source => 'http://gems.github.com', :lib => 'deadweight'
   rakefile 'deadweight.rake' do
