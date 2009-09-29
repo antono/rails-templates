@@ -57,6 +57,7 @@ db/*.db
 db/*.sqlite3
 db/schema.rb
 tmp/**/*
+tmp/*
 # we use lesscss
 public/stylesheets/*.css
 public/stylesheets/**/*.css
