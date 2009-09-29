@@ -69,6 +69,11 @@ config/database.yml
 .DS_Store
 EOF
 
+# Nice ruby hunk-headers for git diff.
+# $ git config --global diff.ruby.funcname '^ *\(\(class\|module\|def\) .*\)'
+file '.gitattributes', "*.rb diff=ruby"
+
+
 commit_all_with_message 'Basic setup of rails app. .gitignore, robots.txt and other stuff.'
 
 # Plugins and gems
