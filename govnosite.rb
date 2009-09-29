@@ -119,7 +119,7 @@ end
 plugin('uni-form', :git => 'git://github.com/antono/uni-form.git', :submodule => true)
 # We always need a model without table...
 plugin('tableless', :git => 'git://github.com/robinsp/active_record_tableless.git', :submodule => true)
-plugin('less-for-rails', :git => 'git://github.com/augustl/less-for-rails.git', :submodule => true)
+plugin('more', :git => 'git://github.com/cloudhead/more.git', :submodule => true)
 # favorite paginator
 plugin('will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true)
 plugin('asset_packager', :git => 'git://github.com/sbecker/asset_packager.git', :submodule => true) if need_asset_packager
@@ -142,7 +142,7 @@ end
 
 gem 'nifty-generators', :lib => 'nifty_generators'
 gem 'cucumber'
-gem 'lesscss'
+gem 'less'
 
 rake("gems:install", :sudo => true)
 rake("gems:unpack")
