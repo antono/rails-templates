@@ -134,7 +134,7 @@ plugin('semantic-menu', :git => 'git://github.com/danielharan/semantic-menu.git'
 
 if need_authorisation
   plugin('authlogic', :git => 'git://github.com/binarylogic/authlogic.git', :submodule => true)
-  plugin('acl9', :git => 'git://github.com/be9/acl9.git', :submodule => true) if need_roles
+  plugin('acl9', :git => 'git://github.com/antono/acl9.git', :submodule => true) if need_roles
 end
 
 if need_aasm
